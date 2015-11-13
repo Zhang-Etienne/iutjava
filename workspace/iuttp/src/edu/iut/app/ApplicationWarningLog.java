@@ -13,7 +13,7 @@ public class ApplicationWarningLog extends AbstractApplicationLog {
 		super.fireMessage("[WARNING]", this.message);
 		for (IApplicationLogListener i : listeners)
 		{
-			i.newMessage(message, message);
+			i.newMessage("[WARNING]", message);
 		}
 	}
 

@@ -15,7 +15,7 @@ public class ApplicationErrorLog extends AbstractApplicationLog {
 		
 		for (IApplicationLogListener i : listeners)
 		{
-			i.newMessage(message, message);
+			i.newMessage("[ERROR]", message);
 		}
 	}
 

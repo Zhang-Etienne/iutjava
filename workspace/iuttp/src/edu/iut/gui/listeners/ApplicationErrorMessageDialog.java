@@ -13,6 +13,7 @@ public class ApplicationErrorMessageDialog extends
 		JOptionPane jop = new JOptionPane();
 		jop.showMessageDialog(null, level, message, JOptionPane.ERROR_MESSAGE);
 		
+		
 	}
 
 

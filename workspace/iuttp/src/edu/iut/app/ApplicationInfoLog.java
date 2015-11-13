@@ -14,7 +14,7 @@ public class ApplicationInfoLog extends AbstractApplicationLog {
         
         for (IApplicationLogListener i : listeners)
 		{
-			i.newMessage(message, message);
+			i.newMessage("[INFO]", message);
 		}
 	}
 
