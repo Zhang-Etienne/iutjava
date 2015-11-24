@@ -5,28 +5,43 @@ import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ApplicationSession {
+public class ApplicationSession{
 	
-	// Exercice 1 : G茅rer l'internationation
-	protected /* Objet permettant la gestion des 'resources bundle' */ resourceBundle;
-	protected /* Objet permettant la gestion des Locales */ locale;
+	// Exercice 1 : Gérer l'internationation
+	protected ResourceBundle resourceBundle; /* Objet permettant la gestion des 'resources bundle' */ 
+	protected Locale locale; /* Objet permettant la gestion des Locales */
 	
 	// Exercice 2 : Logger
 	protected Logger sessionGuiLogger;
 	protected Logger sessionExceptionLogger;
 
 
-	private /*Qu'est ce qu'un singleton ?*/ ApplicationSession session = null;
+	private static ApplicationSession session = null;
+	/*Qu'est ce qu'un singleton ?
+	 * c'est un designe pattern
+	 * 1.garantir qu'une unique instance d'une classe donné sera créée
+	 * 2.offrir un point d'accès universel à cette instance.
+	 */
 	private ApplicationSession() {
-		/* Definir US comme locale par d茅faut */
-		Locale./* 脿 compl茅ter */
+		/* Definir US comme locale par défaut */
+		Locale.setDefault(Locale.US);//我们使用java.lang.Locale来构造Java国际化的情境。
 		
-		locale = Locale.getDefault();
-		resourceBundle = /* 脿 compl茅ter */
-		sessionGuiLogger = /* Initialiser le logger */
-		sessionGuiLogger.setLevel(/* Touls les message doivent 锚tre affich茅 */));
-		sessionExceptionLogger = /* Logger pour exception */
-		sessionExceptionLogger.setLevel(/* Touls les message doivent 锚tre affich茅 */);
+		locale = Locale.getDefault();//获得此Java虚拟机当前线程默认的语言环境值
+		
+		resourceBundle = ResourceBundle.getBundle("edu.iut.resources.strings.ref", locale);
+		/*
+		 * 这个类的作用就是读取资源属性文件（properties）
+		 * 然后根据.properties文件的名称信息（本地化信息）
+		 * 匹配当前系统的国别语言信息（也可以程序指定）
+		 * 然后获取相应的properties文件的内容。
+		 */
+		sessionGuiLogger = Logger.getLogger("Logger"); //getLogger()获得已为此 Logger 指定的日志级别（Level）
+		/* Touls les message doivent être affiché : */
+		sessionGuiLogger.setLevel(Level.ALL); //setLevel()设置日志级别，指定此 logger 记录的消息级别。
+		/* Logger pour exception : */
+		sessionExceptionLogger = Logger.getLogger("LoggerException");
+		/* Touls les message doivent être affiché */
+		sessionExceptionLogger.setLevel(Level.ALL);
 	}
 	
 	
@@ -47,7 +62,8 @@ public class ApplicationSession {
 	public void setLocale(Locale locale){
 		this.locale = locale;
 		Locale.setDefault(this.locale);
-		resourceBundle=/* r茅cup茅rer les resources */
+		/* récupérer les resources : */
+		resourceBundle=ResourceBundle.getBundle("edu.iut.resources.strings.ref", locale);
 	}
 	
 	public String getString(String key) {
